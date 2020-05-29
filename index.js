@@ -77,12 +77,12 @@ between 660 and 740 interest rate doesn't change.
 		var interestRate = interestRate + 0.005;
 	}
 
-	let monthlyInterestRate = interestRate / 12;
-	let periods = years * 12;
+	const monthlyInterestRate = interestRate / 12;
+	const periods = years * 12;
 
-	let numerator = monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
+	const numerator = monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
 
-	let denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
+	const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
 
 	let monthlyRate = principal * (numerator / denominator);
 
@@ -113,14 +113,14 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 function variableInterestRate(principal, interestRate, years) {
 	interestRate = interestRate / 2;
 	for (let i = 0; i < 10; i++) {
-		let monthlyInterestRate = interestRate / 12;
-		let periods = years * 12;
+		const monthlyInterestRate = interestRate / 12;
+		const periods = years * 12;
 
-		let numerator = monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
+		const numerator = monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
 
-		let denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
+		const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
 
-		var monthlyRate = principal * (numerator / denominator);
+		let monthlyRate = principal * (numerator / denominator);
 
 		monthlyRate = Math.round(monthlyRate);
 		// interestRate.toFixed(3);
@@ -141,6 +141,38 @@ these may require additional research beyond what you learned today */
 
 /*  🏡 Add  `Property Tax`, `Homeowner's insurance` and `HOA fees` as parameters in your function to 
 calculate total monthly spending on housing */
+
+function monthlyHouseSpending(
+	principal,
+	interestRate,
+	years,
+	propertyTax,
+	annualInsurance,
+	monthlyHOA,
+) {
+	interestRate = interestRate / 2;
+	for (let i = 0; i < 10; i++) {
+		const monthlyInterestRate = interestRate / 12;
+		const periods = years * 12;
+		const monthlyInsurance = annualInsurance / 12;
+		const monthlyPropertyTax = propertyTax / 12;
+		const numerator = monthlyInterestRate * Math.pow(1 + monthlyInterestRate, periods);
+
+		const denominator = Math.pow(1 + monthlyInterestRate, periods) - 1;
+
+		let monthlyRate = principal * (numerator / denominator);
+
+		monthlyRate = Math.round(monthlyRate);
+		const totalMonthlySpending = monthlyRate + monthlyPropertyTax + monthlyInsurance + monthlyHOA;
+		console.log(
+			`${name}, with an interest rate of ${interestRate.toFixed(
+				3,
+			)}, your monthly spending on housing is $${totalMonthlySpending.toFixed(2)}`,
+		);
+		interestRate = interestRate + 0.005;
+	}
+}
+monthlyHouseSpending(200000, 0.04, 30, 2500, 700, 50);
 
 /* 🏡 Build a calculator function that accepts `monthly payment` and `interest rate` and returns the 
 maximum loan that a person could afford */
